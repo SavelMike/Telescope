@@ -47,6 +47,13 @@ void rotate_down(const std::pair<size_t, size_t>& m_size, std::vector<unsigned c
 	}
 }
 
+void rotate_right(const std::pair<size_t, size_t>& m_size, std::vector<unsigned char>& vec)
+{
+	for (size_t i = 0; i < m_size.first; i++) {
+		std::rotate(vec.begin() + m_size.second * i, vec.begin() + m_size.second * i + m_size.second - 1, vec.begin() + m_size.second * (i + 1));
+	}
+}
+
 void print_vector(const std::pair<size_t, size_t>& m_size, const std::vector<unsigned char>& vec)
 {
 	for (size_t i = 0; i < m_size.first; i++) {
@@ -63,14 +70,13 @@ int main(int argc, char** argv)
 		std::cout << "Usage: " << argv[0] << " step\n";
 		return 1;
 	}
-	int step = atoi(argv[1]);
-	std::pair<size_t, size_t> in_size(3, 2);
+//	int step = atoi(argv[1]);
+	std::pair<size_t, size_t> in_size(6, 6);
 	std::vector<unsigned char> tmp = parse_stream(std::cin, in_size);
 
 	print_vector(in_size, tmp);
-
-	rotate_down(in_size, tmp, step);
-	std::cout << "Resulting matrix with step : " << step << "\n";
+	rotate_right(in_size, tmp);
+	std::cout << "Resulting matrix with shitf to the right :\n";
 	print_vector(in_size, tmp);
 	
 	return 0;
